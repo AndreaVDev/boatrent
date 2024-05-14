@@ -29,25 +29,25 @@ class HolidayList extends Component {
 		.then(response => {
 			console.log(response)
 			this.setState({ holidays: response.data})
+			console.log(response.data)
 		})
 		.catch(error => {
 			console.log(error)
 		})
 	}
 	
-	render () {
+	render() {
 		const { holidays } = this.state
 		return (
 			<div>
-				List of holidays
-				{
-					holidays.length ?
-					holidays.map(holiday => <div key={holiday.boat_name}>{holiday.price_total}</div>) :
-					null
-				}
-			</div>
-		)
-	
+			{holidays &&
+			  holidays["data"].map((holiday) => (
+				<div key={holiday.id}>
+				  <h2>{holiday.boat_name}</h2>
+				</div>
+			  ))}
+		  </div>
+		);
 	}
 }
 
