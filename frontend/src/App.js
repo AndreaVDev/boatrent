@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HolidayList from "./components/HolidayList";
+import CalendarFilter from "./components/CalendarFilter";
 
 class App extends Component {
 	render() {

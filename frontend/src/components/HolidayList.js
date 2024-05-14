@@ -31,10 +31,28 @@ class HolidayList extends Component {
 		const { holidays } = this.state
 		return (
 			<div>
-				List of holidays
+				<h1>List of holidays</h1>
+
 				{
 					holidays.length ?
-					holidays.map(holiday => <div key={holiday.id}>{holiday.boatname}</div>) :
+					//holidays.map(holiday => <div key={holiday.id}>{holiday.boatname}</div>) :
+					holidays.map((holiday,index) => (
+						<div className="card my-3 w-25 mx-auto">
+                  <div className="card-body">
+                    <h2 className="card-title font-weight-bold">Boat name: {holiday.boatname}</h2>
+                    <p className="card-subtitle mb-2">Daily price: {holiday.boatdailyprice}</p>
+                    <p className="card-text">{holiday.boatimage}</p>
+					{holiday.unavailability.map((c,i) => (
+							<div key={i}>
+							 <h2>Unavailability periods</h2>
+							<p>Start date: {c.startdate}</p>
+							<p>End date: {c.enddate}</p>
+						  </div>
+					))}
+					
+                  </div>
+				  </div>
+					)) :
 					null
 				}
 			</div>
