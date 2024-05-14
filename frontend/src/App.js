@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HolidayList from "./components/HolidayList";
 import CalendarFilter from "./components/CalendarFilter";
 
-class App extends Component {
-	render() {
+function App () {
+  //const [startDate, setStartDate] = useState(new Date("2014-02-08"));
+  //const [endDate, setEndDate] = useState(new Date("2014-02-10"));
 		return (
 			<div className="App">
-				<HolidayList/>
+        {/* { <CalendarFilter startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}/> } */}
+        <CalendarFilter/>
+
+				{/* <HolidayList startDate={startDate} endDate={endDate} /> */}
+        <HolidayList/>
+
 			</div>
 		);
-	}
 }
 
 export default App;

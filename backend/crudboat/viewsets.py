@@ -47,21 +47,9 @@ class HolidayViewSet(viewsets.ModelViewSet):
                 print(record)
                 
         
-            final = json.dumps(resp_data, indent = 2)
+            final = json.dumps(resp_data)
             print(final)
-            
-            data = {
-                "status": 0,
-                "message": "Success",
-                "data": {
-                        "updatedAt": "2020-08-31 17:49:15",
-                        "serverTime": "2022-03-23 15:10:11",
-                "news": [{
-                            "id": obj['id'],
-                            "boatname": obj['boatname'],
-                            } for obj in response_data.data]
-                        }
-                }
+    
 
             return Response(final)
         else:
