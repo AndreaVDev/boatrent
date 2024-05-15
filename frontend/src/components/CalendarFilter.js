@@ -37,7 +37,11 @@ export default function CalendarFilter() {
   //   , [counter]);
 
   return (
-    <div>
+<div class="container">  
+<div class="row">
+<div class="col-sm">
+
+<h2>Select the desired period:</h2>
       <DatePicker
         dateFormat={"YYYY-MM-dd"}
         selected={startDate}
@@ -45,7 +49,7 @@ export default function CalendarFilter() {
         selectsStart
         startDate={startDate}
         endDate={endDate}
-      />
+      /> <br/>
       <DatePicker
         dateFormat={"YYYY-MM-dd"}
         selected={endDate}
@@ -55,23 +59,31 @@ export default function CalendarFilter() {
         endDate={endDate}
         minDate={startDate}
       />
+      <br/>
       <button onClick={retrieveAllHolidays} type="button">
         Send request
       </button>
-      <div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
         {holidays && holidays.length ? (
           holidays.map((holiday, index) => (
-            <div key={index}>
-              <h2>{holiday.boat_name}</h2>
-              <h3>{holiday.price_total}</h3>
+            <div key={index} className="card my-3 w-25 ">
+                <div className="card-body">
+
+                <h2 className="card-title font-weight-bold">{holiday.boat_name}</h2>
+              <p>Total price: {holiday.price_total}</p>
+              </div>
             </div>
           ))
         ) : 
           <div>
-            <p>No holiday savailable</p>
+            <p>No holiday available</p>
           </div>
         }
         {/* <button onClick={() => {setCounter(counter + 1)}}>{"Click me"}</button> */}
+      </div>
+      </div>
       </div>
     </div>
   );
