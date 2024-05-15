@@ -61,15 +61,6 @@ class HolidayViewSet(viewsets.ModelViewSet):
         else:
             data = {
                 "status": 0,
-                "message": "Success",
-                "data": {
-                        "updatedAt": "2020-08-31 17:49:15",
-                        "serverTime": "2022-03-23 15:10:11",
-                "news": [{
-                            "id": obj['id'],
-                            "boatname": obj['boatname'],
-                            } for obj in response_data.data]
-                        }
-                }
+                "message": "No slots for the selected period"}
 
-            return Response(data)
+            return Response("No slot")
