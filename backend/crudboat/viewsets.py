@@ -22,6 +22,8 @@ class HolidayViewSet(viewsets.ModelViewSet):
             requested_startdate = datetime.strptime(requested_startdate_str, '%Y-%m-%d')
             requestedenddate_str = request.query_params.get('enddate')
             requestedenddate = datetime.strptime(requestedenddate_str, '%Y-%m-%d')
+            reqdt = requested_startdate.date()
+            reqet = requestedenddate.date()
             holiday_list  = Holiday.objects.all()
             resp_data = []
             for hol in holiday_list:
@@ -30,18 +32,22 @@ class HolidayViewSet(viewsets.ModelViewSet):
                 for d in hol.unavailability.all():
                     un_startdate = d.startdate
                     un_enddate = d.enddate
-                    print(f"Start date {un_startdate}")
-                    print(f"End date {un_enddate}")
+                    print(f"Requested start date {type(requested_startdate)}")
+                    print(f"Requested end date {type(requestedenddate)}")
+                    print(f"Start date {type(un_startdate)}")
+                    print(f"End date {type(un_enddate)}")
                     
-                    dtr1 = DateTimeRange(requested_startdate, requestedenddate)
+                    dtr1 = DateTimeRange(reqdt, reqet)
+                    
                     dtr2 = DateTimeRange(un_startdate, un_enddate)
-                    if dtr1 not in dtr2:
+                   
+                    if  (reqet <= un_startdate or reqdt >= un_enddate):
                         holiday_duration = requestedenddate - requested_startdate 
                         print(holiday_duration.days)
                         price_total = float(holiday_duration.days * boat_price)
-                        print(price_total)
-                        print("Available Boat")
                         resp_data.append({"boat_name":boat_name, "price_total":price_total})
+                    else:
+                        print("No availability")
             
             for record in resp_data:
                 print(record)

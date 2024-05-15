@@ -13,7 +13,6 @@ function App () {
         <CalendarFilter/>
 
 				{/* <HolidayList startDate={startDate} endDate={endDate} /> */}
-        <HolidayList/>
 
 			</div>
 		);
