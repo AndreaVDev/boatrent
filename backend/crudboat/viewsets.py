@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from datetimerange import DateTimeRange
 from datetime import datetime
 import json
+import base64
+
 
 class HolidayViewSet(viewsets.ModelViewSet):
     serializer_class = HolidaySerializer
@@ -45,16 +47,19 @@ class HolidayViewSet(viewsets.ModelViewSet):
                         holiday_duration = requestedenddate - requested_startdate 
                         print(holiday_duration.days)
                         price_total = float(holiday_duration.days * boat_price)
-                        resp_data.append({"boat_name":boat_name, "price_total":price_total})
+                        encoded_base64 = base64.b64encode(hol.boatimage.file.read()) # return bytes
+                        encoded_image = encoded_base64.decode('utf-8')
+                        f = open("demofile2.txt", "a")
+                        f.write(encoded_image)
+                        f.close()
+                        resp_data.append({"boat_name":boat_name, "price_total":price_total, "boat_image":encoded_image})
                     else:
                         print("No availability")
             
-            for record in resp_data:
-                print(record)
+           
                 
         
             final = json.dumps(resp_data)
-            print(final)
     
 
             return Response(final)
@@ -64,3 +69,10 @@ class HolidayViewSet(viewsets.ModelViewSet):
                 "message": "No slots for the selected period"}
 
             return Response("No slot")
+
+
+class HolidayAllViewSet(viewsets.ModelViewSet):
+    serializer_class = HolidaySerializer
+    
+    def get_queryset(self):
+        return Holiday.objects.all()

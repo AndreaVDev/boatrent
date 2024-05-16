@@ -26,6 +26,7 @@ export default function CalendarFilter() {
         enddate: moment(endDate).format("YYYY-MM-DD"),
       },
     });
+    console.log(response)
     setHolidays(JSON.parse(response.data));
   };
 
@@ -73,6 +74,7 @@ export default function CalendarFilter() {
 
                 <h2 className="card-title font-weight-bold">{holiday.boat_name}</h2>
               <p>Total price: {holiday.price_total}</p>
+              <img src={`data:image/jpeg;base64,${holiday.boat_image}`}  width="150px" height="150px"  alt="Boat Image"/>
               </div>
             </div>
           ))
