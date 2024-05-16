@@ -34,7 +34,7 @@ export default function CalendarFilter() {
   // come primo parametro, leggere sempre al contrario
   useEffect(() => {
     retrieveAllHolidays();
-  }, []);
+  }, [retrieveAllHolidays]);
   //   , [counter]);
 
   return (
