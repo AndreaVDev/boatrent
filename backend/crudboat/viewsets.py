@@ -34,10 +34,6 @@ class HolidayViewSet(viewsets.ModelViewSet):
                 for d in hol.unavailability.all():
                     un_startdate = d.startdate
                     un_enddate = d.enddate
-                    print(f"Requested start date {type(requested_startdate)}")
-                    print(f"Requested end date {type(requestedenddate)}")
-                    print(f"Start date {type(un_startdate)}")
-                    print(f"End date {type(un_enddate)}")
                     
                     dtr1 = DateTimeRange(reqdt, reqet)
                     
@@ -45,13 +41,11 @@ class HolidayViewSet(viewsets.ModelViewSet):
                    
                     if  (reqet <= un_startdate or reqdt >= un_enddate):
                         holiday_duration = requestedenddate - requested_startdate 
-                        print(holiday_duration.days)
                         price_total = float(holiday_duration.days * boat_price)
-                        encoded_base64 = base64.b64encode(hol.boatimage.file.read()) # return bytes
-                        encoded_image = encoded_base64.decode('utf-8')
-                        f = open("demofile2.txt", "a")
-                        f.write(encoded_image)
-                        f.close()
+                        encoded_image = ''
+                        if hol.boatimage:
+                            encoded_base64 = base64.b64encode(hol.boatimage.file.read()) # return bytes
+                            encoded_image = encoded_base64.decode('utf-8')    
                         resp_data.append({"boat_name":boat_name, "price_total":price_total, "boat_image":encoded_image})
                     else:
                         print("No availability")
