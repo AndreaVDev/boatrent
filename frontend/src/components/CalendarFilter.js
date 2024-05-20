@@ -9,11 +9,14 @@ const params = {
   startdate: "2024-05-01",
   enddate: "2024-05-14",
 };
-// export default function CalendarFilter(startDate, setStartDate, endDate, setEndDate) {
 export default function CalendarFilter() {
+
+  const myStyle={ 
+    width:'350px', 
+    height:'200px', 
+    }; 
   const [startDate, setStartDate] = useState(new Date("2024-05-01"));
   const [endDate, setEndDate] = useState(new Date("2024-05-30"));
-  //const [state, setstate] = useState({data:{}})
   const [holidays, setHolidays] = useState([]);
 
   const retrieveAllHolidays = async () => {
@@ -43,12 +46,9 @@ export default function CalendarFilter() {
     }
   };
 
-  // useEffect() = hook ogni volta che una delle variabili nell'array come secondo parametro della useEffect [] viene modificata chiama la funziona passata nella useEffect
-  // come primo parametro, leggere sempre al contrario
   useEffect(() => {
     retrieveAllHolidays();
   }, [retrieveAllHolidays]);
-  //   , [counter]);
 
   return (
     <div className="container">
@@ -93,7 +93,7 @@ export default function CalendarFilter() {
             holidays.map((holiday, index) => (
               <div key={index} className="col-sm-3 mt-3 d-flex align-self-stretch">
                 <div className="card flex-fill">
-                  <img className="card-img-top img-fluid flex-fill" src={holiday.boat_image ? `data:image/jpeg;base64,${holiday.boat_image}` : require('../images/dummy.png')} width={260} height={170} alt="Boat" />
+                  <img className="card-img-top img-fluid flex-fill" style={myStyle} src={holiday.boat_image ? `data:image/jpeg;base64,${holiday.boat_image}` : require('../images/dummy.png')} width={260} height={170} alt="Boat" />
                   <div className="card-body flex-fill" >
                     <h5 className="card-title font-weight-bold">{holiday.boat_name}</h5>
                     <p className="card-text">Total price: {holiday.price_total}</p>
