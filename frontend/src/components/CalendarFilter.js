@@ -55,58 +55,59 @@ export default function CalendarFilter() {
       <h2>Select the desired period:</h2>
       <div className="row">
         <div className="col">
-            <h5>Start date</h5>
-            <DatePicker
-              dateFormat={"YYYY-MM-dd"}
-              selected={startDate}
-              onChange={(date) =>
-            setStartDate(date)}
+          <h5>Start date</h5>
+          <DatePicker
+            dateFormat={"YYYY-MM-dd"}
+            selected={startDate}
+            onChange={(date) =>
+              setStartDate(date)}
             selectsStart
             startDate={startDate}
             endDate={endDate}
-            />
+          />
         </div>
         <div className="col">
-            <h5>End date</h5>
-            <DatePicker
-              dateFormat={"YYYY-MM-dd"}
-              selected={endDate}
-              onChange={(date) =>
-            setEndDate(date)}
+          <h5>End date</h5>
+          <DatePicker
+            dateFormat={"YYYY-MM-dd"}
+            selected={endDate}
+            onChange={(date) =>
+              setEndDate(date)}
             selectsEnd
             startDate={startDate}
             endDate={endDate}
             minDate={startDate}
-            />
+          />
         </div>
       </div>
       <div className="row">
         <div className="col">
-            <button onClick={retrieveAllHolidays} type="button">
+          <button onClick={retrieveAllHolidays} type="button">
             Send request
-            </button>
+          </button>
         </div>
       </div>
       <div className="container-fluid">
         <div className="row">
-              {holidays && holidays.length ? (
-              holidays.map((holiday, index) => (
-            <div key={index} className="col-sm-3 mt-3 d-flex align-self-stretch">
-              <div  className="card flex-fill">
-                <img className="card-img-top img-fluid flex-fill" src={ holiday.boat_image ? `data:image/jpeg;base64,${holiday.boat_image}` : require('../images/dummy.png')} width={260} height={170} alt="Boat"/>   
+          {holidays && holidays.length ? (
+            holidays.map((holiday, index) => (
+              <div key={index} className="col-sm-3 mt-3 d-flex align-self-stretch">
+                <div className="card flex-fill">
+                  <img className="card-img-top img-fluid flex-fill" src={holiday.boat_image ? `data:image/jpeg;base64,${holiday.boat_image}` : require('../images/dummy.png')} width={260} height={170} alt="Boat" />
                   <div className="card-body flex-fill" >
                     <h5 className="card-title font-weight-bold">{holiday.boat_name}</h5>
-                    <p className="card-text">Total price: {holiday.price_total}€</p>
+                    <p className="card-text">Total price: {holiday.price_total}</p>
+
                   </div>
+                </div>
               </div>
+            ))
+          ) : (
+            <div>
+              <p>No holiday available</p>
             </div>
-              ))
-              ) : (
-              <div>
-                <p>No holiday available</p>
-              </div>
-              )}
-      </div></div>
- </div>
+          )}
+        </div></div>
+    </div>
   );
 }

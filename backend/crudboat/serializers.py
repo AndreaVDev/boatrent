@@ -21,13 +21,7 @@ class HolidaySerializer(serializers.ModelSerializer):
         rep["unavailability"] = UnavailabilitySerializer(instance.unavailability.all(), many=True).data
         return rep
 
-    
-    # def get_boatimage_url(self, holiday):
-    #     request = self.context.get('request')
-    #     photo_url = holiday.boatimage.url
-    #     return request.build_absolute_uri(photo_url)
 
-        
     def get_boatimage_url(self, holiday):
         return holiday.boatimage.url if holiday.boatimage else ''
     

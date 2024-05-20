@@ -6,7 +6,7 @@ from datetimerange import DateTimeRange
 from datetime import datetime
 import json
 import base64
-
+from .import utilprj
 
 class HolidayViewSet(viewsets.ModelViewSet):
     serializer_class = HolidaySerializer
@@ -45,14 +45,11 @@ class HolidayViewSet(viewsets.ModelViewSet):
                         encoded_image = ''
                         if hol.boatimage:
                             encoded_base64 = base64.b64encode(hol.boatimage.file.read()) # return bytes
-                            encoded_image = encoded_base64.decode('utf-8')    
-                        resp_data.append({"boat_name":boat_name, "price_total":price_total, "boat_image":encoded_image})
+                            encoded_image = encoded_base64.decode('utf-8')
+                        resp_data.append({"boat_name":boat_name, "price_total":utilprj.as_money(price_total), "boat_image":encoded_image})
                     else:
                         print("No availability")
             
-           
-                
-        
             final = json.dumps(resp_data)
     
 
