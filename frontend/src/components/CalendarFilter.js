@@ -1,14 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { baseURL, headers } from "./../services/holiday.service";
+import { baseURL } from "./../services/holiday.service";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
-const params = {
-  startdate: "2024-05-01",
-  enddate: "2024-05-14",
-};
+
 export default function CalendarFilter() {
 
   const myStyle={ 
@@ -48,7 +45,7 @@ export default function CalendarFilter() {
 
   useEffect(() => {
     retrieveAllHolidays();
-  }, [retrieveAllHolidays]);
+  }, []);
 
   return (
     <div className="container">
