@@ -73,6 +73,7 @@ WSGI_APPLICATION = 'boatapi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+#        'HOST': 'db',
 
 DATABASES = {
     'default': {
@@ -80,7 +81,7 @@ DATABASES = {
         'NAME': 'brentdb',
         'USER': 'bradmin',
         'PASSWORD': 'admin',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -131,3 +132,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ["*"]
 ALLOWED_HOSTS = ['*']
+
+
+MEDIA_URL = '/images/'
+print(MEDIA_URL)
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'images\\yachts')
+print(MEDIA_ROOT)

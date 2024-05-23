@@ -9,7 +9,7 @@ class UnavailabilitySerializer(serializers.ModelSerializer):
     
 class HolidaySerializer(serializers.ModelSerializer):
     
-    image_url = serializers.SerializerMethodField('get_boatimage_url')
+    #image_url = serializers.SerializerMethodField('get_boatimage_url')
 
     class Meta:
         model = Holiday
@@ -22,7 +22,7 @@ class HolidaySerializer(serializers.ModelSerializer):
         return rep
 
 
-    def get_boatimage_url(self, holiday):
-        return holiday.boatimage.url if holiday.boatimage else ''
+    #def get_boatimage_url(self, holiday):
+        #return holiday.boatimage.url if holiday.boatimage else ''
     
     

@@ -15,6 +15,7 @@ export default function CalendarFilter() {
   const [startDate, setStartDate] = useState(new Date("2024-05-01"));
   const [endDate, setEndDate] = useState(new Date("2024-05-30"));
   const [holidays, setHolidays] = useState([]);
+  const [requestedDays, setRequestedDays] = useState();
 
   const retrieveAllHolidays = async () => {
     try {
@@ -24,7 +25,9 @@ export default function CalendarFilter() {
           enddate: moment(endDate).format("YYYY-MM-DD"),
         },
       });
-      setHolidays(JSON.parse(response.data));
+      console.log(response)
+      setHolidays(response.data);
+      setRequestedDays(Math.round((endDate.getTime() - startDate.getTime())) / (1000 * 3600 * 24))
       console.log(response.data)
     } catch (error) {
       if (error.response) {
@@ -90,11 +93,10 @@ export default function CalendarFilter() {
             holidays.map((holiday, index) => (
               <div key={index} className="col-sm-3 mt-3 d-flex align-self-stretch">
                 <div className="card flex-fill">
-                  <img className="card-img-top img-fluid flex-fill" style={myStyle} src={holiday.boat_image ? `data:image/jpeg;base64,${holiday.boat_image}` : require('../images/dummy.png')} width={260} height={170} alt="Boat" />
+                  <img className="card-img-top img-fluid flex-fill" style={myStyle} src={holiday.boatimage ? holiday.boatimage : require('../images/dummy.png')} width={260} height={170} alt="Boat" />
                   <div className="card-body flex-fill" >
-                    <h5 className="card-title font-weight-bold">{holiday.boat_name}</h5>
-                    <p className="card-text">Total price: {holiday.price_total}</p>
-
+                    <h5 className="card-title font-weight-bold">{holiday.boatname}</h5>
+                    <p className="card-text">Total price: {holiday.boatdailyprice * requestedDays}</p>
                   </div>
                 </div>
               </div>
